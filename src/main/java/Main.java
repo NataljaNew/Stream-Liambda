@@ -6,29 +6,29 @@ import java.util.stream.Collectors;
 public class Main {
     public static void main(String[] args) {
         Main main = new Main();
-        Function<List<String>, List<String>> function = null;
+
         List <String> list = List.of("b", "d", "a", "c","e");
-        main.method1(function,list);
+        main.method(main.method1(),list);
         System.out.println("________________________");
-        main.method2(function,list);
+        main.method(main.method2(),list);
 
     }
 
-    public Function<List<String>, List<String>> method1(Function<List<String>, List<String>> function, List<String> name) {
-        function = (list) -> list.stream()
+    public Function<List<String>, List<String>> method1( ) {
+        Function<List<String>, List<String>> function = (list) -> list.stream()
                 .sorted()
                 .collect(Collectors.toList());
-        List<String> result = function.apply(name);
-        result.forEach(System.out::println);
         return function;
     }
 
-    public Function<List<String>, List<String>> method2(Function<List<String>, List<String>> function, List<String> name) {
-        function = (list) -> list.stream()
+    public Function<List<String>, List<String>> method2() {
+        Function<List<String>, List<String>> function = (list) -> list.stream()
                 .map (n -> n.toUpperCase(Locale.ROOT))
                 .collect(Collectors.toList());
+        return function;
+    }
+    public void method (Function<List<String>, List<String>> function, List<String> name){
         List<String> result = function.apply(name);
         result.forEach(System.out::println);
-        return function;
     }
 }
